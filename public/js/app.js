@@ -66,17 +66,22 @@
           </form>
           <div class="auth-footer">
             ${isLogin
-                ? 'Don\'t have an account? <a href="#" id="switch-auth">Register</a>'
+                ? ''
                 : 'Already have an account? <a href="#" id="switch-auth">Sign in</a>'}
           </div>
         </div>
       </div>
     `;
 
-        document.getElementById('switch-auth').addEventListener('click', (e) => {
-            e.preventDefault();
-            renderAuth(isLogin ? 'register' : 'login');
-        });
+        if (isLogin) {
+            const footer = document.querySelector('.auth-footer');
+            footer.innerHTML = 'Please sign in to continue.';
+        } else {
+            document.getElementById('switch-auth').addEventListener('click', (e) => {
+                e.preventDefault();
+                renderAuth('login');
+            });
+        }
 
         document.getElementById('auth-form').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -89,17 +94,16 @@
                     email: document.getElementById('auth-email').value,
                     password: document.getElementById('auth-password').value,
                 };
-                if (!isLogin) body.name = document.getElementById('auth-name').value;
-
-                const res = isLogin ? await API.login(body) : await API.register(body);
+                
+                const res = await API.login(body);
                 API.setToken(res.data.token);
                 API.setUser(res.data.user);
-                toast(isLogin ? 'Welcome back!' : 'Account created!');
+                toast('Welcome back!');
                 init();
             } catch (err) {
                 toast(err.message || 'Authentication failed', 'error');
                 btn.disabled = false;
-                btn.textContent = isLogin ? 'Sign in' : 'Create account';
+                btn.textContent = 'Sign in';
             }
         });
     };
