@@ -86,11 +86,10 @@ app.use((err, req, res, _next) => {
 const PORT = process.env.PORT || 3000;
 
 connectDB().then(() => {
-    app.listen(PORT, () => {
+    app.listen(PORT, '0.0.0.0', () => {
         console.log(`\n🧺 Laundry Order Management System`);
-        console.log(`   Server:    http://localhost:${PORT}`);
-        console.log(`   API:       http://localhost:${PORT}/api`);
-        console.log(`   Dashboard: http://localhost:${PORT}\n`);
+        console.log(`   Server is running on port: ${PORT}`);
+        console.log(`   API available at /api`);
     });
 });
 
