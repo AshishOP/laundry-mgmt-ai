@@ -1,0 +1,34 @@
+{
+  "name": "laundry-order-management",
+  "version": "1.0.0",
+  "description": "Mini Laundry Order Management System with JWT auth, MongoDB, and dashboard",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "seed": "node src/utils/seed.js"
+  },
+  "keywords": [
+    "laundry",
+    "order-management",
+    "express",
+    "mongodb"
+  ],
+  "author": "Ashish",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.4.1",
+    "express-validator": "^7.3.2",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.5.0",
+    "nanoid": "^3.3.11"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

@@ -1,350 +1,230 @@
 {
-  "info": {
-    "name": "Grid07 Core API",
-    "description": "Endpoints for the Core API & Guardrails assignment",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-  },
-  "item": [
-    {
-      "name": "Setup",
-      "item": [
-        {
-          "name": "Create User",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"username\": \"ashish\",\n  \"premium\": false\n}"
-            },
-            "url": {
-              "raw": "http://localhost:8080/api/users",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "api",
-                "users"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Create Premium User",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"username\": \"premiumUser\",\n  \"premium\": true\n}"
-            },
-            "url": {
-              "raw": "http://localhost:8080/api/users",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "api",
-                "users"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Create Bot",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"HelperBot\",\n  \"personaDescription\": \"A friendly helper bot that engages with posts\"\n}"
-            },
-            "url": {
-              "raw": "http://localhost:8080/api/bots",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "api",
-                "bots"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Get All Users",
-          "request": {
-            "method": "GET",
-            "url": {
-              "raw": "http://localhost:8080/api/users",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "api",
-                "users"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Get All Bots",
-          "request": {
-            "method": "GET",
-            "url": {
-              "raw": "http://localhost:8080/api/bots",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "api",
-                "bots"
-              ]
-            }
-          }
-        }
-      ]
+    "info": {
+        "_postman_id": "c8e8888b-8888-4444-8888-888888888888",
+        "name": "LaundryOS API",
+        "description": "API collection for the Mini Laundry Order Management System",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
-    {
-      "name": "Posts",
-      "item": [
+    "item": [
         {
-          "name": "Create Post (by User)",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"authorId\": 1,\n  \"authorType\": \"USER\",\n  \"content\": \"Hello everyone! This is my first post.\"\n}"
-            },
-            "url": {
-              "raw": "http://localhost:8080/api/posts",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "api",
-                "posts"
-              ]
-            }
-          }
+            "name": "Auth",
+            "item": [
+                {
+                    "name": "Register",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Ashish\",\n    \"email\": \"ashish@example.com\",\n    \"password\": \"password123\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/auth/register",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "auth",
+                                "register"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Login",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"email\": \"admin@laundry.com\",\n    \"password\": \"admin123\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/auth/login",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "auth",
+                                "login"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
         },
         {
-          "name": "Create Post (by Bot)",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"authorId\": 1,\n  \"authorType\": \"BOT\",\n  \"content\": \"Automated post from HelperBot!\"\n}"
-            },
-            "url": {
-              "raw": "http://localhost:8080/api/posts",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "api",
-                "posts"
-              ]
-            }
-          }
-        }
-      ]
-    },
-    {
-      "name": "Comments",
-      "item": [
-        {
-          "name": "Add Human Comment",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"authorId\": 1,\n  \"authorType\": \"USER\",\n  \"content\": \"Great post! Love this.\"\n}"
-            },
-            "url": {
-              "raw": "http://localhost:8080/api/posts/1/comments",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "api",
-                "posts",
-                "1",
-                "comments"
-              ]
-            }
-          }
+            "name": "Orders",
+            "item": [
+                {
+                    "name": "Get All Orders",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/orders?status=PROCESSING",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "orders"
+                            ],
+                            "query": [
+                                {
+                                    "key": "status",
+                                    "value": "PROCESSING"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Create Order",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"customerName\": \"John Doe\",\n    \"phoneNumber\": \"9876543210\",\n    \"garments\": [\n        {\n            \"garmentType\": \"Shirt\",\n            \"quantity\": 2\n        },\n        {\n            \"garmentType\": \"Pants\",\n            \"quantity\": 1\n        }\n    ],\n    \"notes\": \"Extra starch on shirts please\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/orders",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "orders"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Status",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"status\": \"READY\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/orders/LD-XXXXXXXX/status",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "orders",
+                                "LD-XXXXXXXX",
+                                "status"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
         },
         {
-          "name": "Add Bot Comment",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"authorId\": 1,\n  \"authorType\": \"BOT\",\n  \"content\": \"Thanks for sharing! Very insightful.\"\n}"
+            "name": "Dashboard",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/api/dashboard",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "dashboard"
+                    ]
+                }
             },
-            "url": {
-              "raw": "http://localhost:8080/api/posts/1/comments",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "api",
-                "posts",
-                "1",
-                "comments"
-              ]
+            "response": []
+        }
+    ],
+    "event": [
+        {
+            "listen": "prerequest",
+            "script": {
+                "type": "text/javascript",
+                "exec": [
+                    ""
+                ]
             }
-          }
         },
         {
-          "name": "Add Nested Reply (depth test)",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"authorId\": 1,\n  \"authorType\": \"USER\",\n  \"content\": \"Replying to the first comment\",\n  \"parentCommentId\": 1\n}"
-            },
-            "url": {
-              "raw": "http://localhost:8080/api/posts/1/comments",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "api",
-                "posts",
-                "1",
-                "comments"
-              ]
+            "listen": "test",
+            "script": {
+                "type": "text/javascript",
+                "exec": [
+                    ""
+                ]
             }
-          }
         }
-      ]
-    },
-    {
-      "name": "Likes",
-      "item": [
+    ],
+    "variable": [
         {
-          "name": "Like a Post",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"userId\": 1\n}"
-            },
-            "url": {
-              "raw": "http://localhost:8080/api/posts/1/like",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "api",
-                "posts",
-                "1",
-                "like"
-              ]
-            }
-          }
-        }
-      ]
-    },
-    {
-      "name": "Virality",
-      "item": [
+            "key": "base_url",
+            "value": "http://localhost:3000",
+            "type": "string"
+        },
         {
-          "name": "Get Virality Score",
-          "request": {
-            "method": "GET",
-            "url": {
-              "raw": "http://localhost:8080/api/posts/1/virality",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "api",
-                "posts",
-                "1",
-                "virality"
-              ]
-            }
-          }
+            "key": "token",
+            "value": "PASTE_TOKEN_HERE",
+            "type": "string"
         }
-      ]
-    }
-  ]
+    ]
 }
