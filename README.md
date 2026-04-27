@@ -2,9 +2,24 @@
 
 A professional, high-performance laundry management system built with an "AI-First" methodology. This project demonstrates high-speed execution, deep problem-solving, and a focus on production-grade security.
 
+## 🔗 Repository
+Public GitHub: https://github.com/AshishOP/laundry-mgmt-ai
+
 ## 🚀 Quick Execution Guide
 
-### 1. Zero-Config Startup
+### 1. Prerequisites
+- Node.js 18+
+- MongoDB running locally or remotely
+
+### 2. Environment Setup
+```bash
+cp .env.example .env
+```
+Update at least:
+- `MONGODB_URI`
+- `JWT_SECRET`
+
+### 3. Install + Seed Demo Data
 ```bash
 # Install dependencies
 npm install
@@ -14,7 +29,7 @@ npm run seed
 ```
 **Admin Login:** `admin@laundry.com` | `admin123`
 
-### 2. Run the App
+### 4. Run the App
 ```bash
 npm start
 ```
@@ -43,12 +58,23 @@ Go to: [http://localhost:3000](http://localhost:3000)
 
 ## 🤖 AI Usage & Problem Solving Report
 
-### How AI was Leveraging
+### Tools Used
+- Claude (planning, prompt-based scaffolding, debugging ideas)
+- GitHub Copilot (in-editor code completion and refactors)
+
+### Sample Prompts Used
+1. "Generate Express + MongoDB MVC scaffolding for a laundry order API with create/list/update status and dashboard stats."
+2. "Create a Mongoose order schema that calculates garment subtotals and total bill automatically before save."
+3. "Build a simple monochrome vanilla JS SPA with login, dashboard cards, order table, filters, and modal forms."
+4. "Add status transition validation so order flow is strictly RECEIVED → PROCESSING → READY → DELIVERED."
+5. "Harden this Express app with helmet, rate limiting, JWT auth middleware, and request validation."
+
+### Where AI Helped
 - **Scaffolding**: Used AI to generate the initial Express structure and Mongoose schemas based on the problem statement.
 - **UI Design**: Prompted for a "Monochrome Premium Design System" which generated the base CSS variables and layout structure.
 - **Data Generation**: Used AI to create realistic seed data for the laundry business context.
 
-### Critical Problems Solved (Manual Refinement)
+### What AI Got Wrong + What I Improved
 1. **Express 5.x Wildcard Conflict**: AI generated boilerplate for Express 4.x. Upon running, the server crashed due to a `PathError` in the new routing engine. I manually debugged the router layers and refactored the wildcard logic to use `app.use` middleware for the SPA fallback.
 2. **Mongoose Context Binding**: AI initially suggested `async` arrow functions for Mongoose hooks. I identified that this would break `this` context binding for field calculations and refactored them to standard `function` expressions.
 3. **Regex Security**: I manually improved the phone number regex to strictly enforce 10-digit Indian formats, preventing malformed customer data that AI-generated regex often overlooks.
