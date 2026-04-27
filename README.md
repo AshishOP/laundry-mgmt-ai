@@ -8,6 +8,9 @@
 
 A professional, high-performance laundry management system built with an "AI-First" methodology. This project demonstrates high-speed execution, deep problem-solving, and a focus on production-grade security.
 
+## ✨ Live Demo
+**URL: https://laundry-mgmt-ai.onrender.com**
+
 ## 🔗 Repository
 Public GitHub: https://github.com/AshishOP/laundry-mgmt-ai
 
