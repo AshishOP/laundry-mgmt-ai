@@ -1,9 +1,5 @@
-/**
- * Seed script - creates a demo admin user and sample orders
- * Run: npm run seed
- */
-require('dotenv').config();
-const mongoose = require('mongoose');
+const express = require('express');
+const router = express.Router();
 const User = require('../models/User');
 const Order = require('../models/Order');
 const { nanoid } = require('nanoid');
@@ -57,35 +53,30 @@ const DEMO_ORDERS = [
     },
 ];
 
-async function seed() {
-    try {
-        await mongoose.connect(process.env.MONGODB_URI);
-        console.log('Connected to MongoDB');
+router.get('/seed-database', async (req, res) => {
+    // Basic protection: check for a secret query param
+    if (req.query.secret !== (process.env.SEED_SECRET || 'supersecret')) {
+        return res.status(403).json({ success: false, message: 'Forbidden' });
+    }
 
-        // Clear existing data
+    try {
         await User.deleteMany({});
         await Order.deleteMany({});
-        console.log('Cleared existing data');
 
-        // Create admin user
         const admin = await User.create({
             name: 'Admin',
             email: 'admin@laundry.com',
             password: 'admin123',
             role: 'admin',
         });
-        console.log('✅ Admin user created: admin@laundry.com / admin123');
 
-        // Create staff user
         const staff = await User.create({
             name: 'Staff User',
             email: 'staff@laundry.com',
             password: 'staff123',
             role: 'staff',
         });
-        console.log('✅ Staff user created: staff@laundry.com / staff123');
 
-        // Create demo orders
         for (const orderData of DEMO_ORDERS) {
             const statusFlow = ['RECEIVED', 'PROCESSING', 'READY', 'DELIVERED'];
             const targetIndex = statusFlow.indexOf(orderData.status);
@@ -111,14 +102,24 @@ async function seed() {
                 createdAt: new Date(Date.now() - Math.random() * 7 * 24 * 3600000),
             });
         }
-        console.log(`✅ ${DEMO_ORDERS.length} demo orders created`);
 
-        console.log('\n🎉 Seeding complete!');
-        process.exit(0);
+        res.status(200).json({
+            success: true,
+            message: 'Database seeded successfully!',
+            users: {
+                admin: 'admin@laundry.com / admin123',
+                staff: 'staff@laundry.com / staff123',
+            },
+            orders: `${DEMO_ORDERS.length} orders created.`,
+        });
+
     } catch (error) {
-        console.error('❌ Seeding failed:', error.message);
-        process.exit(1);
+        res.status(500).json({
+            success: false,
+            message: 'Seeding failed',
+            error: error.message,
+        });
     }
-}
+});
 
-seed();
+module.exports = router;
