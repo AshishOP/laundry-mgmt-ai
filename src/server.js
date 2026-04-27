@@ -66,8 +66,8 @@ app.get('/api/health', (req, res) => {
 
 // ─── API Routes ─────────────────────────────────────────────────
 app.use('/api/auth', authRoutes);
-app.use('/api', orderRoutes);
 app.use('/api/dev', seedRoutes); // Use seed routes
+app.use('/api', orderRoutes);
 
 // ─── SPA Fallback ───────────────────────────────────────────────
 app.use((req, res, next) => {
