@@ -1,5 +1,11 @@
 # 🧺 LaundryOS — AI-First Order Management System
 
+![Node.js](https://img.shields.io/badge/Node.js-18%2B-111111?style=flat&logo=node.js&logoColor=white)
+![Express](https://img.shields.io/badge/Express-5.x-111111?style=flat&logo=express&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-Database-111111?style=flat&logo=mongodb&logoColor=white)
+![JWT](https://img.shields.io/badge/Auth-JWT-111111?style=flat)
+![License](https://img.shields.io/badge/License-MIT-111111?style=flat)
+
 A professional, high-performance laundry management system built with an "AI-First" methodology. This project demonstrates high-speed execution, deep problem-solving, and a focus on production-grade security.
 
 ## 🔗 Repository
