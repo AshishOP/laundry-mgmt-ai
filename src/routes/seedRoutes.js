@@ -60,57 +60,66 @@ router.get('/seed-database', async (req, res) => {
     }
 
     try {
-        await User.deleteMany({});
-        await Order.deleteMany({});
-
-        const admin = await User.create({
-            name: 'Admin',
-            email: 'admin@laundry.com',
-            password: 'admin123',
-            role: 'admin',
-        });
-
-        const staff = await User.create({
-            name: 'Staff User',
-            email: 'staff@laundry.com',
-            password: 'staff123',
-            role: 'staff',
-        });
-
-        for (const orderData of DEMO_ORDERS) {
-            const statusFlow = ['RECEIVED', 'PROCESSING', 'READY', 'DELIVERED'];
-            const targetIndex = statusFlow.indexOf(orderData.status);
-            const statusHistory = [];
-
-            for (let i = 0; i <= targetIndex; i++) {
-                statusHistory.push({
-                    status: statusFlow[i],
-                    changedBy: admin._id,
-                    changedAt: new Date(Date.now() - (targetIndex - i) * 3600000),
-                });
-            }
-
-            await Order.create({
-                orderId: `LD-${nanoid(8).toUpperCase()}`,
-                customerName: orderData.customerName,
-                phoneNumber: orderData.phoneNumber,
-                garments: orderData.garments,
-                status: orderData.status,
-                statusHistory,
-                estimatedDelivery: new Date(Date.now() + 48 * 3600000),
-                createdBy: admin._id,
-                createdAt: new Date(Date.now() - Math.random() * 7 * 24 * 3600000),
+        let admin = await User.findOne({ email: 'admin@laundry.com' });
+        if (!admin) {
+            admin = await User.create({
+                name: 'Admin',
+                email: 'admin@laundry.com',
+                password: 'admin123',
+                role: 'admin',
             });
+        }
+
+        let staff = await User.findOne({ email: 'staff@laundry.com' });
+        if (!staff) {
+            staff = await User.create({
+                name: 'Staff User',
+                email: 'staff@laundry.com',
+                password: 'staff123',
+                role: 'staff',
+            });
+        }
+
+        const existingOrders = await Order.countDocuments();
+        let ordersCreated = 0;
+
+        if (existingOrders === 0) {
+            for (const orderData of DEMO_ORDERS) {
+                const statusFlow = ['RECEIVED', 'PROCESSING', 'READY', 'DELIVERED'];
+                const targetIndex = statusFlow.indexOf(orderData.status);
+                const statusHistory = [];
+
+                for (let i = 0; i <= targetIndex; i++) {
+                    statusHistory.push({
+                        status: statusFlow[i],
+                        changedBy: admin._id,
+                        changedAt: new Date(Date.now() - (targetIndex - i) * 3600000),
+                    });
+                }
+
+                await Order.create({
+                    orderId: `LD-${nanoid(8).toUpperCase()}`,
+                    customerName: orderData.customerName,
+                    phoneNumber: orderData.phoneNumber,
+                    garments: orderData.garments,
+                    status: orderData.status,
+                    statusHistory,
+                    estimatedDelivery: new Date(Date.now() + 48 * 3600000),
+                    createdBy: admin._id,
+                    createdAt: new Date(Date.now() - Math.random() * 7 * 24 * 3600000),
+                });
+                ordersCreated += 1;
+            }
         }
 
         res.status(200).json({
             success: true,
-            message: 'Database seeded successfully!',
+            message: 'Database seed completed.',
             users: {
                 admin: 'admin@laundry.com / admin123',
                 staff: 'staff@laundry.com / staff123',
             },
-            orders: `${DEMO_ORDERS.length} orders created.`,
+            ordersCreated,
         });
 
     } catch (error) {

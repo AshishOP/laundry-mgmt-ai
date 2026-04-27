@@ -35,23 +35,16 @@
     };
 
     // ─── Render Auth Page ─────────────────────────────────────
-    const renderAuth = (mode = 'login') => {
-        const isLogin = mode === 'login';
+    const renderAuth = () => {
         app.innerHTML = `
       <div class="auth-container">
         <div class="auth-card fade-in">
           <div style="text-align:center; margin-bottom: 2rem;">
             <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🧺</div>
-            <h1 class="auth-title">${isLogin ? 'Welcome back' : 'Create account'}</h1>
-            <p class="auth-subtitle">${isLogin ? 'Sign in to manage your laundry orders' : 'Register to get started with LaundryOS'}</p>
+            <h1 class="auth-title">Welcome back</h1>
+            <p class="auth-subtitle">Sign in to manage your laundry orders</p>
           </div>
           <form id="auth-form">
-            ${!isLogin ? `
-              <div class="form-group">
-                <label class="form-label">Name</label>
-                <input class="form-input" id="auth-name" type="text" placeholder="John Doe" required minlength="2">
-              </div>
-            ` : ''}
             <div class="form-group">
               <label class="form-label">Email</label>
               <input class="form-input" id="auth-email" type="email" placeholder="you@store.com" required>
@@ -60,28 +53,12 @@
               <label class="form-label">Password</label>
               <input class="form-input" id="auth-password" type="password" placeholder="••••••••" required minlength="6">
             </div>
-            <button type="submit" class="btn btn-primary btn-full" id="auth-submit" style="margin-top: 0.5rem; padding: 12px;">
-              ${isLogin ? 'Sign in' : 'Create account'}
-            </button>
+            <button type="submit" class="btn btn-primary btn-full" id="auth-submit" style="margin-top: 0.5rem; padding: 12px;">Sign in</button>
           </form>
-          <div class="auth-footer">
-            ${isLogin
-                ? ''
-                : 'Already have an account? <a href="#" id="switch-auth">Sign in</a>'}
-          </div>
+          <div class="auth-footer">Only authorized staff/admin accounts can sign in.</div>
         </div>
       </div>
     `;
-
-        if (isLogin) {
-            const footer = document.querySelector('.auth-footer');
-            footer.innerHTML = 'Please sign in to continue.';
-        } else {
-            document.getElementById('switch-auth').addEventListener('click', (e) => {
-                e.preventDefault();
-                renderAuth('login');
-            });
-        }
 
         document.getElementById('auth-form').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -103,7 +80,7 @@
             } catch (err) {
                 toast(err.message || 'Authentication failed', 'error');
                 btn.disabled = false;
-                btn.textContent = 'Sign in';
+              btn.textContent = 'Sign in';
             }
         });
     };

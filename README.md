@@ -11,6 +11,15 @@ A professional, high-performance laundry management system built with an "AI-Fir
 ## ✨ Live Demo
 **URL: https://laundry-mgmt-ai.onrender.com**
 
+### First-time Render bootstrap (free plan)
+If demo users are missing on live deploy, run this once in browser:
+
+`https://laundry-mgmt-ai.onrender.com/api/dev/seed-database?secret=<YOUR_SEED_SECRET>`
+
+Then login with:
+- Admin: `admin@laundry.com` / `admin123`
+- Staff: `staff@laundry.com` / `staff123`
+
 ## 🔗 Repository
 Public GitHub: https://github.com/AshishOP/laundry-mgmt-ai
 
@@ -57,6 +66,7 @@ Go to: [http://localhost:3000](http://localhost:3000)
 
 ### Bonus Features (Included)
 - [x] **Authentication**: Secure JWT-based login/logout.
+- [x] **Role-Based Access**: Public sign-up disabled; only admins can create users.
 - [x] **Database**: Robust MongoDB integration with indexing.
 - [x] **Search**: Search by garment type (e.g., find all "Saree" orders).
 - [x] **Advanced UI**: Minimal monochrome SPA (Single Page Application).
